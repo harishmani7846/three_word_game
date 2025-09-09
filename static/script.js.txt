@@ -1,0 +1,29 @@
+document.getElementById("startForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const players = document.getElementById("players").value;
+  const rounds = document.getElementById("rounds").value;
+
+  const res = await fetch("/start", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ players, rounds })
+  });
+  const data = await res.json();
+  document.getElementById("gameInfo").innerText = data.game_info;
+  document.getElementById("storyBox").innerText = data.story;
+});
+
+document.getElementById("playForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const words = document.getElementById("words").value;
+
+  const res = await fetch("/play", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ words })
+  });
+  const data = await res.json();
+  document.getElementById("gameInfo").innerText = data.game_info;
+  document.getElementById("storyBox").innerText = data.story;
+  document.getElementById("words").value = "";
+});
