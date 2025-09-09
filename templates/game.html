@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Three Word Game ✨</title>
+    <style>
+        body { font-family:'Poppins',sans-serif; background:linear-gradient(135deg,#ff5f6d,#ffc371); color:#fff; margin:0; padding:0; display:flex; justify-content:center; align-items:flex-start; padding-top:30px; }
+        .container { background: rgba(0,0,0,0.7); padding:40px; border-radius:25px; width:600px; box-shadow:0 0 30px #ff00ff,0 0 50px #00ffff; text-align:center; }
+        .title { font-size:2.2rem; margin-bottom:25px; color:#ffd700; text-shadow:2px 2px 5px #ff00ff; }
+        .players-section { display:flex; justify-content:space-around; margin-bottom:20px; }
+        .player-card { padding:10px 20px; border-radius:20px; background:rgba(255,255,255,0.1); transition:transform 0.3s, box-shadow 0.3s; }
+        .player-card.active { background:#00ffff; color:#000; transform:scale(1.1); box-shadow:0 0 20px #00ffff; }
+        .story { text-align:left; max-height:250px; overflow-y:auto; background: rgba(255,255,255,0.1); padding:15px; border-radius:15px; margin-bottom:20px; }
+        .story-line { padding:5px 10px; margin:5px 0; border-radius:10px; background:rgba(255,255,0,0.3); }
+        .final-story { background:#ffea00; color:#000; padding:15px; border-radius:15px; font-weight:bold; text-align:center; }
+        input { width:80%; padding:12px; margin:10px 0; border-radius:15px; border:none; outline:none; font-size:1rem; }
+        button { padding:12px 25px; border:none; border-radius:20px; background:linear-gradient(45deg,#1cb5e0,#000851); color:white; font-size:1.1rem; cursor:pointer; transition:0.3s; }
+        button:hover { background:linear-gradient(45deg,#ff416c,#ff4b2b); transform:scale(1.05); }
+        .form-box { display:flex; flex-direction:column; align-items:center; }
+    </style>
+</head>
+<body>
+    <div class="container game-container">
+        <h1 class="title">✨ Three-Word Story Game 🎮✨</h1>
+
+        <div class="players-section">
+            {% for player in players %}
+            <div class="player-card {% if current_player == player %}active{% endif %}">
+                {% if loop.index0 == 0 %} 🥇 {{ player }}
+                {% elif loop.index0 == 1 %} 🥈 {{ player }}
+                {% else %} 🥉 {{ player }}
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="round-indicator">Round: {{ session.current_round if session.current_round <= rounds else rounds }} / {{ rounds }}</div>
+
+        <div class="story">
+            {% for line in story %}
+            <p class="story-line">✨ {{ line }} ✨</p>
+            {% endfor %}
+        </div>
+
+        {% if finished %}
+            <h2 class="final-title">🎉 Final Story 🎉</h2>
+            <p class="final-story">{{ final_story }}</p>
+            <a href="{{ url_for('history') }}">📜 View History</a>
+        {% else %}
+        <form method="POST" class="form-box">
+            <p>Current Player: <strong>🧑 {{ current_player }}</strong></p>
+            <input type="text" name="word" placeholder="Enter 3 words ✏️" required>
+            <button type="submit">Add Word ➕</button>
+        </form>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Three Word Story</title>
+  <style>
+    body { font-family: Arial; background: #e6ffe6; text-align: center; padding: 50px; }
+    .players { margin: 20px; font-size: 18px; }
+    .highlight { color: red; font-weight: bold; }
+    table { margin: 20px auto; border-collapse: collapse; width: 70%; }
+    th, td { border: 1px solid #ccc; padding: 10px; }
+    th { background: #f0f0f0; }
+    input { padding: 8px; width: 200px; }
+    button { padding: 8px 20px; background: #ff6600; color: white; border: none; border-radius: 5px; }
+    a { display: block; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h2>🎉 Welcome, {{ username }}!</h2>
+  <p class="players">👥 Players: 
+    {% for player in players %}
+      {% if player == current_turn %}
+        <span class="highlight">{{ player }}</span>
+      {% else %}
+        {{ player }}
+      {% endif %}
+      {% if not loop.last %}, {% endif %}
+    {% endfor %}
+  </p>
+  <p>📍 Current Round: <b>{{ round_number }}</b></p>
+  <p>👉 It's <span class="highlight">{{ current_turn }}</span>'s turn!</p>
+
+  {% if username == current_turn %}
+  <form method="post">
+    <input type="text" name="words" placeholder="Enter 3 words" required>
+    <button type="submit">Submit</button>
+  </form>
+  {% else %}
+  <p>⏳ Please wait for your turn...</p>
+  {% endif %}
+
+  <h3>📖 Story Progress</h3>
+  <table>
+    <tr><th>Round</th><th>User</th><th>Words</th></tr>
+    {% for user, story, rnd in stories %}
+      <tr><td>{{ rnd }}</td><td>{{ user }}</td><td>{{ story }}</td></tr>
+    {% endfor %}
+  </table>
+
+  <a href="/history">📖 View Full History</a>
+  <a href="/logout">🚪 Logout</a>
+</body>
+</html>

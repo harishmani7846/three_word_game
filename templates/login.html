@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - Three Word Game</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff5f6d, #ffc371);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: rgba(0,0,0,0.7);
+            padding: 40px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 0 30px #ff00ff, 0 0 50px #00ffff;
+        }
+        h1 { color: #ffd700; }
+        input {
+            width: 80%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 15px;
+            border: none;
+            font-size: 1rem;
+        }
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 20px;
+            background: linear-gradient(45deg, #1cb5e0, #000851);
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+        button:hover { background: linear-gradient(45deg, #ff416c, #ff4b2b); }
+        a { color: #00ffff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        p.error { color:red; }
+        p.success { color:lightgreen; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Three word Games🕹️✨ 🔑</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <p class="{{ category }}">{{ message }}</p>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <form method="POST">
+            <input type="text" name="username" placeholder="Username 👤" required>
+            <input type="password" name="password" placeholder="Password 🔒" required>
+            <button type="submit">Login 🚀</button>
+        </form>
+        <p>Don't have an account? <a href="{{ url_for('register') }}">Register ✏️</a></p>
+    </div>
+</body>
+</html>

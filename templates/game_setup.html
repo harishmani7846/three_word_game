@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Game Setup 🎮</title>
+    <style>
+        body { font-family:'Poppins',sans-serif; background:linear-gradient(135deg,#ff9a9e,#fad0c4); display:flex; justify-content:center; align-items:center; height:100vh; margin:0; }
+        .container { background: rgba(0,0,0,0.7); padding:40px; border-radius:25px; text-align:center; box-shadow: 0 0 30px #ff00ff,0 0 50px #00ffff; }
+        h1 { color:#ffd700; }
+        input { width:80%; padding:12px; margin:10px 0; border-radius:15px; border:none; font-size:1rem; }
+        button { padding:12px 25px; border:none; border-radius:20px; background: linear-gradient(45deg,#1cb5e0,#000851); color:white; font-size:1.1rem; cursor:pointer; }
+        button:hover { background: linear-gradient(45deg,#ff416c,#ff4b2b); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Game Setup 🚀</h1>
+        <form method="POST">
+            <input type="text" name="player1" placeholder="Player 1 Name 🥇" required>
+            <input type="text" name="player2" placeholder="Player 2 Name 🥈" required>
+            <input type="text" name="player3" placeholder="Player 3 Name 🥉" required>
+            <input type="number" name="rounds" placeholder="Number of Rounds 🔢" min="1" required>
+            <button type="submit">Start Game 🎬</button>
+        </form>
+    </div>
+</body>
+</html>
